@@ -7,7 +7,6 @@ import { SettingIcon } from '../Components/Icons/SettingIcon';
 import { PersonalCardIcon } from '../Components/Icons/PersonalCardIcon';
 import { ElementIcon } from '../Components/Icons/ElementIcon';
 import { CalendarIcon } from '../Components/Icons/CalendarIcon';
-// import { Link } from 'react-router-dom';
 
 export function AppAside() {
   return (
@@ -21,7 +20,7 @@ export function AppAside() {
             </NavLink>
           </li>
           <li>
-            <NavLink className="aside-row" to="My CV">
+            <NavLink className="aside-row" to="CV">
               {' '}
               <PersonalCardIcon className="menu-icon" />
               Moje cv
