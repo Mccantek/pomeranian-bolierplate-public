@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.form--container h1 {
+  margin-top: 4rem;
+  margin-left: 2rem;
+}
+
+.form--container h1 {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 69px;
+}
+
+.form--container .label {
+  margin-left: 2rem;
+  display: block;
+  font-weight: bold;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #222222;
+}
+
+.form--container #textInput {
+  margin-left: 2rem;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 3rem;
+  border: 1px solid #c8cbd1;
+}
+
+.form--container .click {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 36px;
+  gap: 16px;
+  margin-left: 2rem;
+  width: 180px;
+  height: 56px;
+  background: #fe3756;
+  text-align: center;
+  cursor: pointer;
+  color: #ffffff;
+  border: 1px solid #fe3756;
+  border-radius: 8px;
+}
+.form--container .click:hover {
+  background: #e67fe6;
+}
