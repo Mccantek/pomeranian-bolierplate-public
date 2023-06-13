@@ -47,7 +47,7 @@ export function ReactRouterEvents() {
       <br />
       <br />
       <div className="counter--container">
-        <p>Licznik: {getCount}</p>
+        <p className="TheCounter">Licznik: {getCount}</p>
         <input
           onClick={handleIncrement}
           type="button"
