@@ -58,3 +58,21 @@
 .form--container .click:hover {
   background: #e67fe6;
 }
+
+.theCounter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 36px;
+  gap: 16px;
+  margin-left: 2rem;
+  width: 180px;
+  height: 56px;
+  background: navy;
+  text-align: center;
+  cursor: pointer;
+  color: #ffffff;
+  border: 1px solid black;
+  border-radius: 8px;
+}
