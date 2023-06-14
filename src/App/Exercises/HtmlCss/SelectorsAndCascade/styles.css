@@ -1,0 +1,12 @@
+.mydiv1 {
+    background-color: gold;
+    padding: 20px;
+}
+
+.plus + div {
+    text-transform: uppercase;
+}
+
+.tylda ~ div {
+    text-align: right;
+}
