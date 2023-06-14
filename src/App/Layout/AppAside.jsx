@@ -34,6 +34,13 @@ export function AppAside() {
             </NavLink>
           </li>
           <li>
+            <NavLink className="aside-row" to="blog">
+              {' '}
+              <ElementIcon className="menu-icon" />
+              Blog
+            </NavLink>
+          </li>
+          <li>
             <NavLink className="aside-row" to="exercises">
               {' '}
               <EditIcon className="menu-icon" />
