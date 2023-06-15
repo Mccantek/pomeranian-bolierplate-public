@@ -1,4 +1,6 @@
-.date {
+@import url('https://fonts.cdnfonts.com/css/made-tommy-outline');
+
+.blog-date {
   width: 70px;
   height: 24px;
 
@@ -60,10 +62,25 @@ h1 {
   text-align: right;
 }
 
-.article {
+.blog-article {
   margin: 20px;
 }
 
 li {
   text-decoration-line: underline;
+}
+
+.blog a[href*='wp.pl'] {
+  font-weight: bold;
+}
+.blog a:visited {
+  color: lime;
+}
+
+.blog-article p:not(:first-of-type) {
+  font-size: 30px;
+}
+
+.blog .blog-article:last-child {
+  cursor: grab;
 }
