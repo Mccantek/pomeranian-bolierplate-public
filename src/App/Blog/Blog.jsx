@@ -2,12 +2,12 @@ import './styles.css';
 
 export const Blog = () => {
   return (
-    <div>
-      <div className="article">
-        <div className="date">30-11-2022 </div>
+    <div className="blog">
+      <div className="blog-article">
+        <div className="blog-date">30-11-2022 </div>
         <h1>Why are we so nostalgic for the 1990s?</h1>
 
-        <p className='blog-post'>
+        <p className="blog-post">
           Pop culture used to define a generation, but it seems the cultural,
           music and fashion trends of the 1990s have been recycled, and what
           Generation X considered its rite of passage into adulthood, is being
@@ -22,10 +22,21 @@ export const Blog = () => {
         <div className="signature name">Radosława Majdan</div>
         <div className="signature title">Senior Marketing Specialist</div>
       </div>
-      <div className="article">
-        <div className="date">30-11-2022 </div>
+      <hr />
+      <div className="blog-article">
+        <div className="blog-date">30-11-2022 </div>
         <h1>I make mistakes!</h1>
 
+        <p className="quote">
+          “I’m selfish, impatient and a little insecure. I make mistakes, I am
+          out of control and at times hard to handle. But if you can’t handle me
+          at my worst, then you sure as hell don’t deserve me at my best.”
+        </p>
+        <p className="quote">
+          “I’m selfish, impatient and a little insecure. I make mistakes, I am
+          out of control and at times hard to handle. But if you can’t handle me
+          at my worst, then you sure as hell don’t deserve me at my best.”
+        </p>
         <p className="quote">
           “I’m selfish, impatient and a little insecure. I make mistakes, I am
           out of control and at times hard to handle. But if you can’t handle me
@@ -36,12 +47,13 @@ export const Blog = () => {
         <div className="signature name">Radosława Majdan</div>
         <div className="signature title">Senior Marketing Specialist</div>
       </div>
+      <hr />
 
-      <div className="article">
-        <div className="date">30-11-2022 </div>
+      <div className="blog-article">
+        <div className="blog-date">30-11-2022 </div>
         <h1>18 Record-Breaking, Controversial, and Weird Facts </h1>
         <br /> <br />
-        <p className='blog-post'>
+        <p className="blog-post">
           The death of Queen Elizabeth II on September 8 at the age of 96
           represents a monumental shift for the British monarchy and the people
           of England. Royals have died before, of course, but the Queen ruled
@@ -51,9 +63,29 @@ export const Blog = () => {
           scandals.
         </p>
         <ul>
-          <li>WP.PL 1</li>
-          <li>WP.PL 2</li>
-          <li>ONET.PL</li>
+          <li>
+            <a href="https://wp.pl" target="_blank">
+              {' '}
+              WP.PL 1
+            </a>
+          </li>
+          <li>
+            <a href="https://wp.pl" target="_blank">
+              WP.PL 2
+            </a>
+          </li>
+          <li>
+            <a href="https://onet.pl" target="_blank">
+              {' '}
+              ONET.PL
+            </a>
+          </li>
+          <li>
+            <a href="https://google.pl" target="_blank">
+              {' '}
+              gogol.pl
+            </a>
+          </li>
         </ul>
         <div className="signature name">Radosława Majdan</div>
         <div className="signature title">Senior Marketing Specialist</div>
