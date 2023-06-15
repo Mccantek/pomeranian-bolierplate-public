@@ -1,3 +1,5 @@
+import { Author } from './Author/Author';
+import { Title } from './Title/Title';
 import './styles.css';
 
 export const Blog = () => {
@@ -5,7 +7,7 @@ export const Blog = () => {
     <div className="blog">
       <div className="blog-article">
         <div className="blog-date">30-11-2022 </div>
-        <h1>Why are we so nostalgic for the 1990s?</h1>
+        <Title text="Why are we so nostalgic for the 1990s?" />
 
         <p className="blog-post">
           Pop culture used to define a generation, but it seems the cultural,
@@ -18,14 +20,12 @@ export const Blog = () => {
           from which to enjoy the dulcet tones of everyone from Salt-N-Pepa to
           Rick Astley.
         </p>
-
-        <div className="signature name">Radosława Majdan</div>
-        <div className="signature title">Senior Marketing Specialist</div>
+        <Author name="Radosława Majdan" title="Senior Marketing Specialist" />
       </div>
       <hr />
       <div className="blog-article">
         <div className="blog-date">30-11-2022 </div>
-        <h1>I make mistakes!</h1>
+        <Title text="I make mistakes!" />
 
         <p className="quote">
           “I’m selfish, impatient and a little insecure. I make mistakes, I am
@@ -44,8 +44,7 @@ export const Blog = () => {
         </p>
         <div className="author">Marilyn Monroe</div>
 
-        <div className="signature name">Radosława Majdan</div>
-        <div className="signature title">Senior Marketing Specialist</div>
+        <Author name="Radosława Majdan" title="Senior Marketing Specialist" />
       </div>
       <hr />
 
@@ -87,8 +86,7 @@ export const Blog = () => {
             </a>
           </li>
         </ul>
-        <div className="signature name">Radosława Majdan</div>
-        <div className="signature title">Senior Marketing Specialist</div>
+        <Author name="Radosława Majdan" title="Senior Marketing Specialist" />
       </div>
     </div>
   );
