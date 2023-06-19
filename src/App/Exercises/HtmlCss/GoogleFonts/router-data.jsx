@@ -1,4 +1,4 @@
-import { GoogleFont } from '.';
+import {  Exercise3 } from '.';
 import React from 'react';
 
 export const GoogleFontMeta = {
@@ -6,6 +6,6 @@ export const GoogleFontMeta = {
   date: '16-06-2023',
   linkLabel: 'import',
   blockNo: 11,
-  element: <GoogleFont />,
+  element: <Exercise3 />,
   tags: ['text', 'fundaments'],
 };
