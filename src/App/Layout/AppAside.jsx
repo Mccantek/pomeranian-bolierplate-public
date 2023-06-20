@@ -7,6 +7,8 @@ import { SettingIcon } from '../Components/Icons/SettingIcon';
 import { PersonalCardIcon } from '../Components/Icons/PersonalCardIcon';
 import { ElementIcon } from '../Components/Icons/ElementIcon';
 import { CalendarIcon } from '../Components/Icons/CalendarIcon';
+import { FAQIcon } from '../Components/Icons/FAQIcon';
+import { ExeIcon } from '../Components/Icons/Exercises';
 
 export function AppAside() {
   return (
@@ -43,7 +45,7 @@ export function AppAside() {
           <li>
             <NavLink className="aside-row" to="exercises">
               {' '}
-              <EditIcon className="menu-icon" />
+              <ExeIcon className="menu-icon" />
               Ćwiczenia
             </NavLink>
           </li>
@@ -58,6 +60,12 @@ export function AppAside() {
             <NavLink className="aside-row" to="settings">
               <SettingIcon className="menu-icon" />
               Ustawienia
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="aside-row" to="faq">
+              <FAQIcon className="menu-icon" />
+              FAQ
             </NavLink>
           </li>
         </ul>
