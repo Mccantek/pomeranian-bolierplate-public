@@ -1,0 +1,12 @@
+tr:nth-child(even) {
+  background: #cfcaca;
+}
+.dog-table {
+  border: 2px solid black;
+}
+
+.dog-table tbody tr:hover {
+  background-color: gold;
+  font-weight: bold;
+  box-shadow: 5px 1px #888888;
+}

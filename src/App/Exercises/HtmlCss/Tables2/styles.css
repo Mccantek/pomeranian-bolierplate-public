@@ -1,0 +1,36 @@
+.rating-table {
+  background-color: black;
+  /* border: 1.41471px solid #000000; */
+  font-family: 'Poppins';
+  text-align: left;
+  margin: 0;
+  -webkit-box-shadow: 3px 1px 24px 0px rgba(204, 204, 208, 1);
+  -moz-box-shadow: 3px 1px 24px 0px rgba(204, 204, 208, 1);
+  box-shadow: 3px 1px 24px 0px rgba(204, 204, 208, 1);
+  width: 716px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.rating-table tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+.rating-table th {
+  background: #f5f5f5;
+  text-transform: capitalize;
+  /* height: 84px; */
+}
+.rating-table td,
+.rating-table th {
+  padding: 0px 28.2941px 0px 46px;
+  height: 84px;
+}
+.rating-table tr:nth-child(even) {
+  background: #ffd5db;
+}
+
+.justify-right {
+  display: flex;
+  justify-content: flex-end;
+  
+}
