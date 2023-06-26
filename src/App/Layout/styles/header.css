@@ -19,6 +19,58 @@ header.header-title {
 }
 
 header .logo {
-  height: 40vmin;
   pointer-events: none;
+  height: auto;
+  height: 40vmin;
+}
+
+.profile-picture .placeholder {
+  border-radius: 50%;
+  background-color: #e5e5e5;
+  width: 50px;
+  height: 50px;
+}
+
+header button.settings {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+header button.settings:hover {
+  border: dotted 1px lightgray;
+  border-radius: 50%;
+}
+.left {
+  display: flex;
+  justify-content: flex-start;
+}
+.right {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+header .user-details {
+  align-items: flex-end;
+}
+
+header .user-details p {
+  margin: 0;
+}
+
+header .cogwheel {
+  height: 26px;
+}
+
+header button.dropdown-menu {
+  align-self: center;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  border: solid 1px transparent;
 }

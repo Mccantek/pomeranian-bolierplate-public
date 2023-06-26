@@ -1,2 +1,45 @@
+.dashboard h3 {
+  /* color: #fe3756; */
+  display: inline;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.dashboard .subtitle {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.dashboard .links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 30px;
+  width: 676px;
+}
+
 .dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 0.9fr;
+  grid-template-rows: auto 1.2fr 1fr;
+  gap: 20px 20px;
+  grid-template-areas:
+    'Header Header Aside'
+    'Links Links Aside'
+    'Links Links Aside';
+}
+.dashboard .dash-head {
+  grid-area: Header;
+  display: flex;
+  flex-direction: column;
+  align-self: baseline;
+}
+.dashboard aside {
+  grid-area: Aside;
+}
+.dashboard .links {
+  grid-area: Links;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }

@@ -1,0 +1,53 @@
+.dashboard-card {
+  border: 0.66px solid #c8cbd1;
+  border-radius: 8px;
+  background: #ffffff;
+  width: 202px;
+  height: 192px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.dashboard-card h3 {
+  color: black;
+}
+
+.dashboard-card a {
+  color: #ff4d69;
+  font-size: 14px;
+  text-align: center;
+  font-family: 'Poppins';
+  font-weight: bold;
+}
+
+.dashboard-card .icon-wrapper {
+  color: #fe3756;
+}
+
+.dashboard-card p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 20px;
+
+  text-align: center;
+}
+
+.dashboard-card:hover {
+  -webkit-box-shadow: 8px 8px 24px 0px rgba(254, 55, 86, 0.5);
+  -moz-box-shadow: 8px 8px 24px 0px rgba(254, 55, 86, 0.5);
+  box-shadow: 8px 8px 24px 0px rgba(254, 55, 86, 0.5);
+}
+
+.dashboard-card:hover h3 {
+  color: #ff4d69;
+}
+
+.dashboard-card img {
+    width: 33px;
+    height: 33px;
+}
