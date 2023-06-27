@@ -7,6 +7,7 @@ const Cookies = () => {
   const handleAgreementCustomization = () => {};
   return (
     <div className="cookies-agreement ">
+      <div className='left'>
       <div className="text-wrapper">
         {' '}
         <img className="cookies-icon" src={cookies} alt="cookies icon" />
@@ -20,7 +21,7 @@ const Cookies = () => {
           “dopasuj zgody”, aby następnie wybrać te które odpowiadają Twoim
           indywidualnym preferencjom.{' '}
         </p>{' '}
-      </div>
+      </div></div>
       <div className="button-wrapper">
         {' '}
         <button className="agree" onClick={handleAgreement}>

@@ -36,11 +36,17 @@
 
 .cookies-agreement .text-wrapper {
   margin: 2em;
-  flex: 1;
+
 }
 
 .cookies-agreement .button-wrapper {
   display: flex;
   align-items: center;
   gap: 2em;
+}
+
+.cookies-agreement .left {
+  display: flex;
+  flex: 1;
+  gap: 20px ;
 }
