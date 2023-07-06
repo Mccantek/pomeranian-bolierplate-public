@@ -8,7 +8,6 @@ import code from '../Images/code.svg';
 import { useState } from 'react';
 import wave from '../Images/wave.svg';
 import Cookies from '../Components/Cookies/Cookies';
-// import Profile from 
 
 export const Dashboard = () => {
   const [availableCards] = useState([
@@ -69,7 +68,6 @@ export const Dashboard = () => {
       </div>
       <aside className='about-me'>
         testowy profile
-        {/* < Profile />  */}
       </aside>
     </div>
   );
