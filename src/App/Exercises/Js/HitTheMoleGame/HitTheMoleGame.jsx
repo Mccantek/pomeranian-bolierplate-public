@@ -4,45 +4,66 @@ import './style.css';
 import MoleGameSettings from './Settings';
 import MoleGameBoard from './MoleGameBoard';
 
+const CountdownTimer = ({ countdown }) => {
+  return (
+    <div>
+      <p>time remaining: {countdown} seconds</p>
+    </div>
+  );
+};
 export function HitTheMoleGame() {
   const defaultGameTime = 2 * 60 * 1000;
-  const [gameTime, setGameTime] = useState(defaultGameTime / 1000);
-  // const [seconds, setSeconds] = useState(gameTime / 1000);
+  const moleSpeed = 1000;
+  const [gameTime, setGameTime] = useState(defaultGameTime);
+  const [seconds, setSeconds] = useState(gameTime / 1000);
 
   const [moleCount, setMoleCount] = useState(1);
   const [scoreCount, setScoreCount] = useState(0);
-  const [score, setScore] = useState(0);
   const [moleArray, setMoleArray] = useState(
     Array(10).fill({ isVisible: false, isWhacked: false })
   );
+  const [countdown, setCountdown] = useState(seconds);
+  const [gameStarted, setGameStarted] = useState(false);
+  useEffect(() => {
+    setSeconds(gameTime / 1000);
+  }, [gameTime]);
 
-  const CountdownTimer = ({ initialCountdownState }) => {
-    const [countdown, setCountdown] = useState(initialCountdownState);
-    useEffect(() => {
-      if (!countdown) return;
-      const interval = setInterval(() => {
-        setCountdown((prevCountdown) => prevCountdown - 1000);
-      }, 1000);
-
+  useEffect(() => {
+    setCountdown(seconds);
+    if (gameStarted) {
+      let interval;
+      if (!interval) {
+        interval = setInterval(() => {
+          setCountdown((prevCountdown) => prevCountdown - 1);
+        }, 1000);
+      }
       return () => {
         clearInterval(interval);
       };
-    }, [countdown]);
-    return (
-      <div>
-        <p>time remaining: {countdown / 1000} seconds</p>
-      </div>
-    );
-  };
+    }
+  }, [seconds, gameStarted]);
+
+  useEffect(() => {
+    let intervalId;
+    if (!intervalId) {
+      intervalId = setInterval(() => {
+        showRandomMole();
+      }, moleSpeed);
+      return () => clearInterval(intervalId);
+    }
+  });
 
   function hitTheMole(index) {
-    console.log(moleArray[index].isWhacked);
-
     if (!moleArray[index].isVisible) return;
-
     moleArray[index].isWhacked = !moleArray[index].isWhacked;
-
-    console.log(moleArray[index].isWhacked);
+    if (moleArray[index].isVisible) {
+      setScoreCount(scoreCount + 1);
+      setMoleArray((prevValue) => {
+        const newArray = [...prevValue];
+        newArray[index].isVisible = false;
+        return newArray;
+      });
+    }
   }
 
   function showRandomMole() {
@@ -63,7 +84,6 @@ export function HitTheMoleGame() {
       })
     );
   }
-
   return (
     <>
       <MoleGameSettings
@@ -71,16 +91,26 @@ export function HitTheMoleGame() {
         moleCount={moleCount}
         setGameTime={setGameTime}
         setMoleCount={setMoleCount}
+        startStopGame={() => setGameStarted((prev) => !prev)}
+        gameStarted={gameStarted}
       />
 
-      <MoleGameBoard
-        scoreCount={scoreCount}
-        moleArray={moleArray}
-        hitTheMole={hitTheMole}
-      />
+      {gameTime !== seconds && seconds !== 0 ? (
+        <MoleGameBoard
+          scoreCount={scoreCount}
+          moleArray={moleArray}
+          hitTheMole={hitTheMole}
+          countdown = {countdown}
+          startStopGame={() => setGameStarted((prev) => !prev)}
+          gameStarted={gameStarted}
+        />
+      ) : null}
 
-      <CountdownTimer initialCountdownState={gameTime} />
-      <button onClick={() => showRandomMole()}>HELLO THERE</button>
+      <CountdownTimer countdown={countdown} />
     </>
   );
 }
+// wynik 20 - koniec
+// timer 0 - koniec
+
+// if countdown !== 0 && gamestarted ? board : null

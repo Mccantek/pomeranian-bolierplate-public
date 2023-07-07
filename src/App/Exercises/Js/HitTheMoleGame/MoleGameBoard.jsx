@@ -1,21 +1,41 @@
 import React from 'react';
 import Mole from './mole.svg';
-const MoleGameBoard = ({ scoreCount, moleArray, hitTheMole }) => {
+import './style.css';
+
+const MoleGameBoard = ({
+  scoreCount,
+  moleArray,
+  hitTheMole,
+  countdown,
+  startStopGame,
+  gameStarted,
+}) => {
+  const formattedTime = new Date(countdown * 1000).toISOString().slice(14, 19);
+
   return (
-    <div className="moleGame" >
-      <h4>Current score = {scoreCount} </h4>
-      <div style={{ display: 'flex', gap: '5px' }}>
+    <div className="moleGame">
+      <div className="info-container">
+        <div>
+          <h4>czas do końca</h4>
+          <button> {formattedTime} </button>
+        </div>
+        <div>
+          <h4>WYNIK</h4>
+          <button> {scoreCount}</button>{' '}
+        </div>
+        <div>
+          <h4>PRZYCISKI STERUJĄCE</h4>
+
+          <button onClick={startStopGame}>
+            {' '}
+            {gameStarted ? 'STOP' : 'START'}
+          </button>
+        </div>
+      </div>
+      <div className="board">
         {moleArray.map((mole, index) => {
           return (
-            <div
-              style={{
-                width: '104px',
-                height: '104px',
-                backgroundColor: '#EBEBEB',
-                borderRadius: '8px',
-                margin: '5px',
-              }}
-            >
+            <div className="square" style={{}}>
               <span>
                 {mole.isVisible ? (
                   <img src={Mole} onClick={() => hitTheMole(index)} />
