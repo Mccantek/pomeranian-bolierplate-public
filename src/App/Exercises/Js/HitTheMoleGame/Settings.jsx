@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import './style.css';
 
 const MoleGameSettings = ({
   gameTime,
@@ -7,6 +7,8 @@ const MoleGameSettings = ({
   setMoleCount,
   startStopGame,
   gameStarted,
+  scoreCount,
+  spentTime,
 }) => {
   const gameTimeOption = [
     { label: '1 minuta', timeValue: 1 * 60 * 1000 },
@@ -26,12 +28,21 @@ const MoleGameSettings = ({
 
   return (
     <>
-      <div className="moleGameOptions">
-        <p>
-          Gra polegająca na podążaniu za krecikiem i trafieniu na kwadrat, w
-          którym się pojawił.
-        </p>
+      {typeof scoreCount === 'number' ? (
+        <>
+          {' '}
+          <h2>
+            {' '}
+            Gratulacje! Twój wynik to {scoreCount} złapanych kretów w czasie{' '}
+            {spentTime} sekund!
+          </h2>{' '}
+          <h5>
+            a jak masz poniżej 20 kretów, gramatyka to twój najmniejszy problem
+          </h5>
+        </>
+      ) : null}
 
+      <div className="moleGameOptions">
         <div className="gameOptionsButtons">
           <div className="gameButtonsRows">
             <div>
@@ -65,7 +76,10 @@ const MoleGameSettings = ({
             <div>
               <h4>PRZYCISKI STERUJĄCE</h4>
 
-              <button onClick={startStopGame}> {gameStarted ? "STOP" : "START"}</button>
+              <button onClick={startStopGame}>
+                {' '}
+                {gameStarted ? 'STOP' : 'START'}
+              </button>
             </div>
           </div>
         </div>

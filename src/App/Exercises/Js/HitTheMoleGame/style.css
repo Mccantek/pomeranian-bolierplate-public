@@ -99,22 +99,25 @@
 .moleGame {
   text-transform: uppercase;
 }
-.moleGame .info-container {
-  
-
+.mole-info-container {
   display: grid;
 
-  grid-template-columns: 1fr 2fr;
-
-  grid-template-rows:  1fr 0.9fr 1.1fr; 
+  grid-area: 1 / 1 / 5 / 5;
 
   grid-column-gap: 5px;
 
   grid-row-gap: 5px;
+  text-transform: uppercase;
 }
 
-.moleGame button {
-  padding: 20px, 36px, 20px, 36px;
+.mole-info-container button {
+  padding: 20px 36px;
   border-radius: 8px;
   background-color: #ebebeb;
+  border: none;
+  display: inline-block;
+}
+
+.board {
+  margin-top: 1em;
 }
