@@ -14,25 +14,23 @@ const MemoGameSettings = ({
             <div>
               <h4>LICZBA ELEMENTÓW</h4>
 
-              {boardSizeOptions.map(
-                ({ label,  checked }, index) => (
-                  <button
-                    className={checked ? 'activeButton' : ''}
-                    onClick={() => {
-                      setBoardSizeOptions((prev) =>
-                        prev.map((button, i) => {
-                          const newButton = { ...button };
+              {boardSizeOptions.map(({ label, checked }, index) => (
+                <button
+                  className={checked ? 'activeButton' : ''}
+                  onClick={() => {
+                    setBoardSizeOptions((prev) =>
+                      prev.map((button, i) => {
+                        const newButton = { ...button };
 
-                          newButton.checked = index === i;
-                          return newButton;
-                        })
-                      );
-                    }}
-                  >
-                    {label}
-                  </button>
-                )
-              )}
+                        newButton.checked = index === i;
+                        return newButton;
+                      })
+                    );
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
 
             <div>

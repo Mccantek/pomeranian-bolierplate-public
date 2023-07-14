@@ -1,12 +1,22 @@
 import React from 'react';
 import './style.css';
 
-const MemoBoard = ({ gameArray, handleCellClick }) => {
+const MemoBoard = ({
+  gameArray,
+  handleCellClick,
+  stage,
+  renderElement,
+  gameStarted,
+}) => {
   return (
+    // <div className="board" >
+    //   {gameArray.map(() => {
+    //     return <div className="square" onClick={handleCellClick}>{stage}</div>;
+    //   })}
+    // </div>
+
     <div className="board" >
-      {gameArray.map(() => {
-        return <div className="square" onClick={handleCellClick}></div>;
-      })}
+      {gameStarted && stage.map(renderElement)}
     </div>
   );
 };
