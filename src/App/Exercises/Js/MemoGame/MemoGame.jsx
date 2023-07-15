@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import MemoGameSettings from './MemoGameSettings';
 import MemoBoard from './MemoBoard';
+
 const alphabet = [
   'A',
   'B',
@@ -30,6 +31,7 @@ const alphabet = [
   'Y',
   'Z',
 ];
+
 const getRandomLetters = (amount) => {
   const shuffled = [...alphabet].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, amount / 2);
@@ -50,12 +52,14 @@ export function MemoGame() {
     { label: '16 elementów', boardSizeValue: 16, checked: false },
     { label: '20 elementów', boardSizeValue: 20, checked: false },
   ]);
-  const DEBUG_showAll = false;
   const [gameArray, setGameArray] = useState(
     Array(
       boardSizeOptions.find((option) => option.checked).boardSizeValue
     ).fill('A')
   );
+  const guessedPairs = stage.filter((card) => card.isGuessed).length;
+
+  const formattedTime = new Date(time * 1000).toISOString().slice(14, 19);
 
   function startMemoGame() {
     const getRandomLettersList = getRandomLetters(
@@ -76,7 +80,7 @@ export function MemoGame() {
         setTime((prevCountdown) => prevCountdown + 1);
       }, 1000);
     }
-    if (time === 60) {
+    if (time === 180) {
       clearInterval(interval);
       setGameStarted(false);
     }
@@ -121,6 +125,15 @@ export function MemoGame() {
     return () => clearTimeout(timeout);
   }, [firstClickedCard, secondClickedCard]);
 
+  useEffect(() => {
+    // Check if all cards have isGuessed = true
+    const isGameComplete = stage.every((card) => card.isGuessed);
+
+    if (isGameComplete) {
+      setGameStarted(false);
+    }
+  }, [stage]);
+
   function handleCellClick(card) {
     if (card.id === firstClickedCard || card.isGuessed) return;
     if (typeof firstClickedCard !== 'number') {
@@ -144,8 +157,8 @@ export function MemoGame() {
         onClick={() => handleCellClick(cardObject)}
       >
         {/* {cardObject.character} */}
-        {(cardObject.isGuessed || cardObject.isVisible || DEBUG_showAll) &&
-          cardObject.character}
+        {/* {(cardObject.isGuessed || cardObject.isVisible || DEBUG_showAll) && */}
+        {(cardObject.isGuessed || cardObject.isVisible) && cardObject.character}
       </div>
     );
   }
@@ -156,7 +169,8 @@ export function MemoGame() {
       classes.push('guessed');
     }
 
-    if (!el.isVisible && !el.isGuessed && !DEBUG_showAll) {
+    // if (!el.isVisible && !el.isGuessed && !DEBUG_showAll) {
+    if (!el.isVisible && !el.isGuessed) {
       classes.push('closed');
     }
 
@@ -167,36 +181,53 @@ export function MemoGame() {
       <p>
         Gra polegająca na zapamiętywaniu odkrytych kafli i łączeniu ich w pary
       </p>
-      {/* {!gameStarted ? ( */}
-      <MemoGameSettings
-        startStopGame={() => {
-          setGameStarted((prev) => !prev);
+      {!gameStarted ? (
+        <>
+          {guessedPairs > 0 ? (
+            <h2>
+              {' '}
+              Gratulacje! Twój wynik to {guessedPairs} par w czasie{' '}
+              {formattedTime} i {clicks} ruchach!
+            </h2>
+          ) : null}
+          <MemoGameSettings
+            startStopGame={() => {
+              setGameStarted((prev) => !prev);
 
-          setTime(0);
-          setClicks(0);
-          startMemoGame();
-        }}
-        gameStarted={gameStarted}
-        gameArray={gameArray}
-        setGameArray={setGameArray}
-        boardSizeOptions={boardSizeOptions}
-        setBoardSizeOptions={setBoardSizeOptions}
-        stage={stage}
-      />
-      {/* ) : null} */}
-      {/* { gameStarted? (<>  */}
-      <Timer time={time} />
-      <MoveCounter clicks={clicks} />
+              setTime(0);
+              setClicks(0);
+              startMemoGame();
+            }}
+            gameStarted={gameStarted}
+            gameArray={gameArray}
+            setGameArray={setGameArray}
+            boardSizeOptions={boardSizeOptions}
+            setBoardSizeOptions={setBoardSizeOptions}
+            stage={stage}
+          />{' '}
+        </>
+      ) : null}
+      {gameStarted ? (
+        <>
+          <Timer time={time} />
+          <MoveCounter clicks={clicks} />
 
-      <MemoBoard
-        gameArray={gameArray}
-        handleCellClick={handleCellClick}
-        renderElement={renderElement}
-        gameStarted={gameStarted}
-        stage={stage}
-      />
-      {/* </>) */}
-      {/* // : null  } */}
+          <MemoBoard
+            gameArray={gameArray}
+            handleCellClick={handleCellClick}
+            renderElement={renderElement}
+            gameStarted={gameStarted}
+            stage={stage}
+            startStopGame={() => {
+              setGameStarted((prev) => !prev);
+
+              setTime(0);
+              setClicks(0);
+              startMemoGame();
+            }}
+          />
+        </>
+      ) : null}
     </>
   );
 }

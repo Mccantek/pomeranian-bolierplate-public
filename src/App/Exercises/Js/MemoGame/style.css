@@ -120,6 +120,7 @@
 
 .board {
   margin-top: 1em;
+  font-size: 100px;
 }
 
 .stage {
@@ -141,15 +142,18 @@
 }
 
 .closed {
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
 }
 
 .closed:hover {
-  box-shadow: 0 0 - 4px 26px rgba(0, 0, 0, 0.08); 
+  box-shadow: 0 0 - 4px 26px rgba(0, 0, 0, 0.08);
 }
 
 .guessed {
-  background-color: #F3AEA8;
+  background-color: #e2fbd7;
+}
+.missed {
+  background-color: #f3aea8;
 }
 
 .menu {
@@ -168,7 +172,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
   padding: 10px 20px;
-  border-radius: 5px;;
+  border-radius: 5px;
 }
