@@ -1,4 +1,4 @@
-import TryCatchAndFinally from './index';
+import {TryCatchAndFinally} from './index';
 
 export const blockRouterMetaData = {
   path: 'try-catch-and-finally',

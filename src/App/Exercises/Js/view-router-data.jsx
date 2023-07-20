@@ -10,6 +10,9 @@ import { blockRouterMetaData as Time2 } from './Time2/router-data';
 import { blockRouterMetaData as ExerciseStorage } from './Exercise-js-local-storage/router-data';
 import { blockRouterMetaData as SavedInput } from './Exercise-js-saved-input/router-data';
 import { blockRouterMetaData as TryAndCatch } from './TryCatchAndFinally/router-data';
+import { blockRouterMetaData as ExerciseTryCatch } from './ExerciseTryCatch/router-data';
+import { blockRouterMetaData as Prototypes } from './Prototypess/router-data';
+import { blockRouterMetaData as JsThis } from './jsThis/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaDataJsVariables1,
@@ -22,5 +25,8 @@ export const blockRouterMetaData = [
   ExerciseStorage,
   SavedInput,
   TryAndCatch,
+  ExerciseTryCatch,
+  Prototypes,
+  JsThis,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
