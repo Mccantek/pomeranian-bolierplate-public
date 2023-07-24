@@ -13,6 +13,7 @@ import { blockRouterMetaData as TryAndCatch } from './TryCatchAndFinally/router-
 import { blockRouterMetaData as ExerciseTryCatch } from './ExerciseTryCatch/router-data';
 import { blockRouterMetaData as Prototypes } from './Prototypess/router-data';
 import { blockRouterMetaData as JsThis } from './jsThis/router-data';
+import { blockRouterMetaData as Fetch } from './WillSee/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaDataJsVariables1,
@@ -28,5 +29,6 @@ export const blockRouterMetaData = [
   ExerciseTryCatch,
   Prototypes,
   JsThis,
+  Fetch,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
