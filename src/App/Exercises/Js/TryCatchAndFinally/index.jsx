@@ -1,65 +1,45 @@
-import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { debounce, throttle } from 'lodash';
-import './styles.css';
-/*
-Api po czasie zwraca długość imienia użytownika jako ID
-Input który pobiera imię
-*/
+import React, { useState } from 'react';
+import { useDebounce } from './useDebounce';
 
-const api = (userName) =>
-  new Promise((resolve) => {
-    const mockedResponseFromServer = userName.length;
-    debugger;
+const SERVER_LAG = 2000;
+const DEBOUNCE_VALUE = 1000;
+
+const api = async (userName) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        data: { id: mockedResponseFromServer },
+        data: { id: userName.length },
         status: 200,
         message: 'OK',
       });
-    }, 0);
+    }, SERVER_LAG);
   });
-
+};
 export const TryCatchAndFinally = () => {
-  const cbApi = React.useCallback(api, []);
-  const debouncedApi = React.useMemo(() => debounce(api, 1000), [cbApi]);
   const [userName, setUserName] = useState('');
+  const [id, setId] = useState();
   const getUserId = async (userName) => {
-    if (!userName) {
-      return;
-    }
+    if (!userName) return;
     try {
-      const { data } = await debouncedApi(userName);
-      console.log('ID użytkownika:' + data.id);
+      const { data } = await api(userName);
+      setId(data.id);
     } catch (err) {
       console.error(err);
     }
   };
-  const cbGetUserId = React.useCallback(getUserId, []);
 
-  useEffect(() => {
-    getUserId(userName);
-    return () => debouncedApi.cancel();
-  }, [userName]);
-
-  // useEffect(() => {}, [debouncedApi]);
-
-  const handleAddName = (userName) => {
-    setUserName(userName);
-  };
-
-  // const throttledHandleAddName = throttle(handleAddName, 400);
+  useDebounce(() => getUserId(userName), [userName], DEBOUNCE_VALUE);
 
   return (
     <div>
+      Current user id: {id || "Didn't provide any username"}
+      <br />
       Podaj imię
       <input
         type="text"
         value={userName}
-        onChange={(event) => {
-          // debugger;
-          handleAddName(event.target.value);
+        onChange={(e) => {
+          setUserName(e.target.value);
         }}
       />
     </div>
