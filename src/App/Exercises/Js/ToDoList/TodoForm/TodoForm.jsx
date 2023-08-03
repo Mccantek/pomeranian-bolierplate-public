@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './TodoForm.css';
 import axios from 'axios';
 import { BASE_API_URL } from '../ToDoList';
+import { SuccessPopup } from './Popup';
 
 export function TodoForm({ setAddingMode }) {
   const [title, setTitle] = useState('');
@@ -9,6 +10,7 @@ export function TodoForm({ setAddingMode }) {
   const [note, setNote] = useState('');
   const [isError, setError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   async function handleCreateTodo() {
     console.log(title, 'title');
@@ -25,9 +27,7 @@ export function TodoForm({ setAddingMode }) {
       setAuthor('');
       setNote('');
       setIsSuccess(true);
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 3000);
+      setShowSuccessPopup(true);
     } catch (error) {
       setError(true);
     }
@@ -73,11 +73,11 @@ export function TodoForm({ setAddingMode }) {
             }}
           />
         </div>
-        {isSuccess && (
-          <p className="todo-form__success-message">
-            {' '}
-            {title} dodano do listy zadań
-          </p>
+        {isSuccess && showSuccessPopup && (
+          <SuccessPopup
+            title={title}
+            onClose={() => setShowSuccessPopup(false)}
+          />
         )}
         {isError && (
           <p className="todo-form__error-message">
