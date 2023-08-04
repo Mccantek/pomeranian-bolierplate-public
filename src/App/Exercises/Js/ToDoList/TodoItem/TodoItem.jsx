@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { formatDate } from '../../../../../helpers/formatDate';
 import { BinIcon } from '../Icons/BinIcon';
+import { EditIcon } from '../Icons/EditIcon';
 import { BASE_API_URL } from '../ToDoList';
 import './TodoItem.css';
 import { useState } from 'react';
 
-export function TodoItem({ todo, getTodoList }) {
+export function TodoItem({ todo, getTodoList, setIdForEdit, setFormVisible }) {
   //   const todo = props.todo;
   const { title, author, createdAt, isDone, doneDate, note, id } = todo;
   const [removeError, setRemoveError] = useState(false);
@@ -14,7 +15,8 @@ export function TodoItem({ todo, getTodoList }) {
   function handleRemoveClick() {
     axios
       .delete(BASE_API_URL + '/todo/' + id)
-      .then(() => { getTodoList()
+      .then(() => {
+        getTodoList();
       })
       .catch(() => {
         setRemoveError(true);
@@ -34,6 +36,15 @@ export function TodoItem({ todo, getTodoList }) {
         <p className="todo-item__wrapper__text">{note}</p>
       </div>
       <div className="todo-item__actions">
+        <button
+          className="todo-item__actions__button todo-item__actions__icon"
+          onClick={() => {
+            setIdForEdit(id);
+            setFormVisible(true);
+          }}
+        >
+          <EditIcon isError={removeError} />
+        </button>
         <button
           className="todo-item__actions__button todo-item__actions__icon"
           onClick={() => handleRemoveClick()}

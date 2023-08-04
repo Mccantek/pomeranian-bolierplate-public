@@ -10,8 +10,9 @@ export const BASE_API_URL = 'http://localhost:3333/api';
 export function ToDoList() {
   const [todoList, setToDoList] = useState([]);
   const [error, setError] = useState([]);
-  const [isAddingMode, setAddingMode] = useState(false);
+  const [isFormVisible, setFormVisible] = useState(false);
 
+  const [idForEdit, setIdForEdit] = useState(null);
   const handleFetchTodoData = async () => {
     const timoutDuration = 5000; // 5 sekund oczekiwania na odpowiedz serwera
     try {
@@ -49,8 +50,15 @@ export function ToDoList() {
         </>
       )}
 
-      {isAddingMode && <TodoForm setAddingMode={setAddingMode} />}
-      {!isAddingMode && (
+      {isFormVisible && (
+        <TodoForm
+          setFormVisible={setFormVisible}
+          handleFetchTodoData={handleFetchTodoData}
+          setIdForEdit={setIdForEdit}
+          data={todoList.find((todo) => todo.id === idForEdit)}
+        />
+      )}
+      {!isFormVisible && (
         <>
           <div className="todo-container__list">
             {todoList.length > 0 &&
@@ -60,6 +68,8 @@ export function ToDoList() {
                     todo={todo}
                     key={todo.id}
                     getTodoList={handleFetchTodoData}
+                    setIdForEdit={setIdForEdit}
+                    setFormVisible={setFormVisible}
                   />
                 );
               })}
@@ -67,7 +77,7 @@ export function ToDoList() {
           <button
             className="big-button"
             onClick={() => {
-              setAddingMode(true);
+              setFormVisible(true);
             }}
           >
             DODAJ

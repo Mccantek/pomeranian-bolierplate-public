@@ -4,14 +4,22 @@ import axios from 'axios';
 import { BASE_API_URL } from '../ToDoList';
 import { SuccessPopup } from './Popup';
 
-export function TodoForm({ setAddingMode }) {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [note, setNote] = useState('');
+export function TodoForm({
+  setFormVisible,
+  handleFetchTodoData,
+  data,
+  setIdForEdit,
+}) {
+  const isEditMode = Boolean(data);
+  const [title, setTitle] = useState(isEditMode ? data.title : '');
+  const [author, setAuthor] = useState(isEditMode ? data.author : '');
+  const [note, setNote] = useState(isEditMode ? data.note : '');
   const [isError, setError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
 
   async function handleCreateTodo() {
+    setInProgress(true);
     try {
       await axios.post(BASE_API_URL + '/todo', {
         title, // można również: title: title
@@ -20,22 +28,45 @@ export function TodoForm({ setAddingMode }) {
       });
       setIsSuccess(true);
       setTimeout(() => {
-        /**aktualizuj pola po 3s  */
+        /**aktualizuj pola po 2s  */
         setTitle('');
         setAuthor('');
         setNote('');
-      }, 3000);
+      }, 2000);
     } catch (error) {
       setError(true);
+    } finally {
+      setInProgress(false);
     }
   }
-  const isReadyToSend =
-    title.length > 0 && note.length > 0 && author.length > 0;
+
+  async function handleEditTodo() {
+    setInProgress(true);
+    try {
+      await axios.put(BASE_API_URL + '/todo/' + data.id, {
+        title, // można również: title: title
+        note,
+        author,
+      });
+      setIsSuccess(true);
+    } catch (error) {
+      setError(true);
+    } finally {
+      setInProgress(false);
+    }
+  }
+
+  const isTitleToLong = title.length > 15;
+  const isAuthorTooLong = author.length > 15;
+  const isNoteTooLong = note.length > 100;
+  const isFormValid = !isTitleToLong && !isAuthorTooLong && !isNoteTooLong;
+  const isFormFilled = title.length > 0 && note.length > 0 && author.length > 0;
+  const isReadyToSend = isFormFilled && isFormValid;
 
   return (
     <>
       <div className="todo-form">
-        <h3>Dodawanie zadania</h3>
+        {isEditMode ? <h3>Edycja zadania</h3> : <h3>Dodawanie zadania</h3>}
         <div className="todo-form__field">
           <label className="todo-form__field__label">tytuł</label>
           <input
@@ -47,17 +78,33 @@ export function TodoForm({ setAddingMode }) {
             }}
           />
         </div>
-        <div className="todo-form__field">
-          <label className="todo-form__field__label">autor</label>
-          <input
-            type="text"
-            placeholder="Jan Kowalski"
-            value={author}
-            onChange={(event) => {
-              setAuthor(event.target.value);
-            }}
-          />
-        </div>
+        {isTitleToLong && (
+          <p className="todo-form-error-message-small">
+            {' '}
+            Podany tekst przekracza 15 znaków
+          </p>
+        )}
+        {!isEditMode && (
+          <>
+            <div className="todo-form__field">
+              <label className="todo-form__field__label">autor</label>
+              <input
+                type="text"
+                placeholder="Jan Kowalski"
+                value={author}
+                onChange={(event) => {
+                  setAuthor(event.target.value);
+                }}
+              />
+            </div>
+            {isAuthorTooLong && (
+              <p className="todo-form-error-message-small">
+                {' '}
+                Podany tekst przekracza 15 znaków
+              </p>
+            )}
+          </>
+        )}
         <div className="todo-form__field">
           <label className="todo-form__field__label">treść</label>
           <textarea
@@ -70,6 +117,15 @@ export function TodoForm({ setAddingMode }) {
             }}
           />
         </div>
+        {isNoteTooLong && (
+          <p className="todo-form-error-message-small">
+            {' '}
+            Podany tekst przekracza 100 znaków
+          </p>
+        )}
+        {inProgress && (
+          <p className="todo-form__info-message"> Trwa zapisywanie</p>
+        )}
         {isSuccess && (
           <SuccessPopup title={title} onClose={() => setIsSuccess(false)} />
         )}
@@ -83,7 +139,10 @@ export function TodoForm({ setAddingMode }) {
           <button
             className="big-button"
             onClick={() => {
-              setAddingMode(false);
+              setFormVisible(false);
+              handleFetchTodoData();
+              setIdForEdit(null);
+          
             }}
           >
             Cofnij
@@ -91,11 +150,15 @@ export function TodoForm({ setAddingMode }) {
           <button
             className="big-button"
             onClick={() => {
-              handleCreateTodo();
+              if (isEditMode) {
+                handleEditTodo();
+              } else {
+                handleCreateTodo();
+              }
             }}
             disabled={!isReadyToSend}
           >
-            Dodaj
+            {isEditMode ? 'Zapisz' : 'Dodaj'}
           </button>
         </div>{' '}
       </div>
