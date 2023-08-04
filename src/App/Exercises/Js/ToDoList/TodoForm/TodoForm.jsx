@@ -10,7 +10,6 @@ export function TodoForm({ setAddingMode }) {
   const [note, setNote] = useState('');
   const [isError, setError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   async function handleCreateTodo() {
     console.log(title, 'title');
@@ -27,7 +26,6 @@ export function TodoForm({ setAddingMode }) {
       setAuthor('');
       setNote('');
       setIsSuccess(true);
-      setShowSuccessPopup(true);
     } catch (error) {
       setError(true);
     }
@@ -73,10 +71,10 @@ export function TodoForm({ setAddingMode }) {
             }}
           />
         </div>
-        {isSuccess && showSuccessPopup && (
+        {isSuccess && (
           <SuccessPopup
             title={title}
-            onClose={() => setShowSuccessPopup(false)}
+            onClose={() =>  setIsSuccess(false) }
           />
         )}
         {isError && (

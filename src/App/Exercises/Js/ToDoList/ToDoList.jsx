@@ -4,6 +4,8 @@ import axios from 'axios';
 import './style.css';
 import { TodoItem } from './TodoItem/TodoItem';
 import { TodoForm } from './TodoForm/TodoForm';
+import RefreshButton from '../../../Components/RefreshButton/RefreshButton';
+
 export const BASE_API_URL = 'http://localhost:3333/api';
 export function ToDoList() {
   const [todoList, setToDoList] = useState([]);
@@ -38,7 +40,14 @@ export function ToDoList() {
   return (
     <div className="todo-container">
       <h2 className="todo-container__title">ToDo List</h2>
-      {error && <p>{error}</p>}
+      {error && (
+        <>
+          <p>
+            {error} <br />{' '}
+          </p>{' '}
+          <RefreshButton />
+        </>
+      )}
 
       {isAddingMode && <TodoForm setAddingMode={setAddingMode} />}
       {!isAddingMode && (
