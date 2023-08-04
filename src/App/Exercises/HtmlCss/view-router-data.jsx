@@ -8,7 +8,7 @@ import { SelectorsAndCascadeMetaData } from './SelectorsAndCascade/router-data';
 import { TablesMetaData } from './Tables/router-data';
 import { TextFundamentsMetaData } from './TextFundaments/router-data';
 import { Tables2MetaData } from './Tables2/router-data';
-// import { FloatsRouterMetaData } from './FloatsAndPositioning/router-data';
+import { FigmaFloatRouterMetaData } from './FloatsAndPositioning/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaData121220231,
@@ -17,6 +17,6 @@ export const blockRouterMetaData = [
   GoogleFontMeta,
   TablesMetaData,
   Tables2MetaData,
-  // FloatsRouterMetaData,
+  FigmaFloatRouterMetaData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
