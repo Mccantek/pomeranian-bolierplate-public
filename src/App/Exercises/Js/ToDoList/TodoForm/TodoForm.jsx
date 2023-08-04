@@ -12,20 +12,19 @@ export function TodoForm({ setAddingMode }) {
   const [isSuccess, setIsSuccess] = useState(false);
 
   async function handleCreateTodo() {
-    console.log(title, 'title');
-    console.log(author, 'autor');
-    console.log(note, 'note');
-
     try {
       await axios.post(BASE_API_URL + '/todo', {
         title, // można również: title: title
         note,
         author,
       });
-      setTitle('');
-      setAuthor('');
-      setNote('');
       setIsSuccess(true);
+      setTimeout(() => {
+        /**aktualizuj pola po 3s  */
+        setTitle('');
+        setAuthor('');
+        setNote('');
+      }, 3000);
     } catch (error) {
       setError(true);
     }
@@ -52,7 +51,7 @@ export function TodoForm({ setAddingMode }) {
           <label className="todo-form__field__label">autor</label>
           <input
             type="text"
-            placeholder="autor"
+            placeholder="Jan Kowalski"
             value={author}
             onChange={(event) => {
               setAuthor(event.target.value);
@@ -72,10 +71,7 @@ export function TodoForm({ setAddingMode }) {
           />
         </div>
         {isSuccess && (
-          <SuccessPopup
-            title={title}
-            onClose={() =>  setIsSuccess(false) }
-          />
+          <SuccessPopup title={title} onClose={() => setIsSuccess(false)} />
         )}
         {isError && (
           <p className="todo-form__error-message">
