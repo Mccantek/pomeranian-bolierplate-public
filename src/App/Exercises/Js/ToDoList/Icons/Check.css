@@ -1,0 +1,11 @@
+.bin-icon path {
+  fill: #000;
+}
+
+.bin-icon:hover path {
+  fill: #06a0f9;
+}
+
+.bin-icon--error path {
+  fill: #ff0000;
+}

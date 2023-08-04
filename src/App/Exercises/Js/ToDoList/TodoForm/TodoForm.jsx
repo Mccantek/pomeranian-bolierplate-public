@@ -140,9 +140,9 @@ export function TodoForm({
             className="big-button"
             onClick={() => {
               setFormVisible(false);
-              handleFetchTodoData();
+              handleFetchTodoData(isEditMode ? data.id : undefined);
+              // handleFetchTodoData();
               setIdForEdit(null);
-          
             }}
           >
             Cofnij

@@ -5,8 +5,15 @@ import { EditIcon } from '../Icons/EditIcon';
 import { BASE_API_URL } from '../ToDoList';
 import './TodoItem.css';
 import { useState } from 'react';
+import { CheckIcon } from '../Icons/CheckIcon';
 
-export function TodoItem({ todo, getTodoList, setIdForEdit, setFormVisible }) {
+export function TodoItem({
+  todo,
+  getTodoList,
+  setIdForEdit,
+  setFormVisible,
+  updatedTodoList,
+}) {
   //   const todo = props.todo;
   const { title, author, createdAt, isDone, doneDate, note, id } = todo;
   const [removeError, setRemoveError] = useState(false);
@@ -23,6 +30,15 @@ export function TodoItem({ todo, getTodoList, setIdForEdit, setFormVisible }) {
       });
   }
 
+  function handleMarkAsDoneClick() {
+    axios
+      .put(BASE_API_URL + '/todo/' + id + '/markAsDone')
+      .then((response) => {
+        updatedTodoList(response.data);
+      })
+      .catch(() => {});
+  }
+
   return (
     <div className={itemClasses} key={id}>
       <div className="todo-item__wrapper">
@@ -36,6 +52,15 @@ export function TodoItem({ todo, getTodoList, setIdForEdit, setFormVisible }) {
         <p className="todo-item__wrapper__text">{note}</p>
       </div>
       <div className="todo-item__actions">
+        <button
+          className="todo-item__actions__button todo-item__actions__icon"
+          onClick={() => {
+            handleMarkAsDoneClick();
+          }}
+        >
+          <CheckIcon isError={removeError} />
+        </button>
+
         <button
           className="todo-item__actions__button todo-item__actions__icon"
           onClick={() => {

@@ -7,16 +7,30 @@ import { TodoForm } from './TodoForm/TodoForm';
 import RefreshButton from '../../../Components/RefreshButton/RefreshButton';
 
 export const BASE_API_URL = 'http://localhost:3333/api';
+const timoutDuration = 5000; // 5 sekund oczekiwania na odpowiedz serwera
 export function ToDoList() {
   const [todoList, setToDoList] = useState([]);
   const [error, setError] = useState([]);
   const [isFormVisible, setFormVisible] = useState(false);
-
   const [idForEdit, setIdForEdit] = useState(null);
-  const handleFetchTodoData = async () => {
-    const timoutDuration = 5000; // 5 sekund oczekiwania na odpowiedz serwera
+
+  function updatedTodoList(response) {
+    setToDoList(
+      todoList.map((todo) => {
+        if (todo.id === response.data.id) {
+          return response.data;
+        }
+        return todo;
+      })
+    );
+  }
+
+  const handleFetchTodoData = async (givenId) => {
+    const isGetSpecificTodoMode = Boolean(givenId);
+
+    const urlSuffix = isGetSpecificTodoMode ? `/${givenId}` : '';
     try {
-      const fetchDataPromise = axios.get(`${BASE_API_URL}/todo`);
+      const fetchDataPromise = axios.get(`${BASE_API_URL}/todo${urlSuffix}`);
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => reject(new Error('Response Timeout')), timoutDuration);
       });
@@ -28,12 +42,19 @@ export function ToDoList() {
       if (response) {
         setToDoList(response.data);
         setError('');
+
+        if (isGetSpecificTodoMode) {
+        updatedTodoList(response.data)
+        } else {
+          setToDoList(response.data);
+        }
       }
     } catch (error) {
       setToDoList([]);
       setError('Wystąpił błąd podczas komunikacji z serwerem' + error?.message);
     }
   };
+
   useEffect(() => {
     handleFetchTodoData();
   }, []);
@@ -70,6 +91,7 @@ export function ToDoList() {
                     getTodoList={handleFetchTodoData}
                     setIdForEdit={setIdForEdit}
                     setFormVisible={setFormVisible}
+                    updatedTodoList={updatedTodoList}
                   />
                 );
               })}
