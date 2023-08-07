@@ -1,0 +1,46 @@
+.todo-form__buttons {
+  display: flex;
+  text-transform: uppercase;
+}
+
+.todo-form__field {
+  margin: 20px;
+}
+
+.todo-form__field__label {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.todo-form__error-message {
+  font-weight: bold;
+  color: red;
+}
+.todo-form__success-message {
+  color: lime;
+  font-weight: bold;
+}
+.todo-form__info-message {
+  color: gold;
+}
+
+.success-popup {
+  position: fixed;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+.todo-form-error-message-small {
+  color: red;
+  font-size: 15px;
+  margin-left: 20px;
+  margin-top: -20px;
+}

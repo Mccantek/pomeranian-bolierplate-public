@@ -5,11 +5,11 @@ function Car(make, model) {
   this.model = model;
 }
 
-Object.prototype.getMake = function () {
+Object.prototype.getmake = function () {
   return this.make;
 };
 
-Object.prototype.getModel = function () {
+Object.prototype.getmodel = function () {
   return this.model;
 };
 function Bike(param) {
@@ -27,10 +27,10 @@ const myCar2 = new Car('Peugeot', 'RCZ');
 export const JsPrototypes = () => {
   return (
     <div className="container--js-prototypes">
-      Make: {myCar.getMake()}
-      Model: {myCar.getModel()}
-      Make2: {myCar2.getMake()}
-      Model2: {myCar2.getModel()}
+      Make: {myCar.getmake()}
+      Model: {myCar.getmodel()}
+      Make2: {myCar2.getmake()}
+      Model2: {myCar2.getmodel()}
       {exampleArray.newArrayMethod()}
     </div>
   );

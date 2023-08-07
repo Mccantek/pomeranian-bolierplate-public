@@ -38,13 +38,13 @@ export const JsThis = () => {
     constructor(make) {
       this.make = make;
     }
-    getMake() {
+    getmake() {
       console.log(this.make);
     }
   }
 
   const myCar = new Car('Ferrari');
-  myCar.getMake();
+  myCar.getmake();
 
   ////// Call() function example implementation
 
