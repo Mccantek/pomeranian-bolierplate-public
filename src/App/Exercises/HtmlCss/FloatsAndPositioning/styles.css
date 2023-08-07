@@ -1,0 +1,91 @@
+:root {
+  --pink: #ffd5db;
+  --gray: #ebebeb;
+  --dark: #4b5563;
+}
+.Flexbox-exercise {
+  font-family: 'Poppins', sans-serif;
+  width: 984px;
+}
+.Flexbox-exercise p {
+  font-size: 22px;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.Flexbox-exercise .indented {
+  text-indent: 20px;
+}
+
+.Flexbox-exercise .breadcrumbs {
+  font-weight: bold;
+  padding: 10px;
+}
+
+.on-the-right {
+  background-color: var(--pink);
+  border: 1px solid #999999;
+  border-radius: 6px;
+  width: 12rem;
+  text-align: center;
+  position: absolute;
+  right: -10%;
+  top: 35%;
+}
+
+.Flexbox-exercise .gray-background {
+  background-color: var(--gray);
+  padding: 17px;
+  text-align: justify;
+}
+.pink-background {
+  background-color: var(--pink);
+  height: 279px;
+  float: right;
+  position: relative;
+  padding-left: 450px;
+  padding-top: 32px;
+  text-align: justify;
+}
+
+.grid-exercise {
+  position: relative;
+}
+.grid-exercise img {
+  position: absolute;
+  border-radius: 8px;
+  width: 402px;
+  height: 350px;
+  top: 27px;
+  left: 33px;
+}
+
+.grid-exercise .small {
+  border-radius: 6px;
+  background-color: var(--pink);
+  width: 103px;
+  height: 66px;
+  padding: 12px;
+  position: absolute;
+  right: -10%;
+  bottom: 10px;
+}
+
+.Flexbox-exercise .large {
+  background-color: var(--pink);
+  border: solid 1px #fe3756;
+  padding: 10px, 127px, 10px, 127px;
+  border-radius: 20px;
+  height: 94px;
+  width: 423px;
+  margin-bottom: 30px;
+}
+
+.Flexbox-exercise .dark-background {
+  background-color: var(--dark);
+  color: white;
+}

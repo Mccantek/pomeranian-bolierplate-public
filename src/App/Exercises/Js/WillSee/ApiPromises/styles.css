@@ -1,0 +1,33 @@
+.container--grid-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px;
+  padding: 16px;
+}
+
+.container--grid-tile {
+  border: 1px solid;
+  padding: 8px;
+  border-radius: 8px;
+  flex: 0 0 calc((100% / 4) - calc(8px * 3) / 4);
+  min-width: 1fr;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-family: 'Poppins';
+  background-color: snow;
+}
+
+.container--grid-tile + .pokemon-type img {
+  border: 1px solid black;
+}
+.container--grid-tile + .dedicated-background--fire {
+  background-color: red;
+}
+
+.container--grid-tile + .dedicated-background--water {
+  background-color: aqua;
+}
+
+.container--grid-tile + .dedicated-background--grass {
+  background-color: greenyellow;
+}
