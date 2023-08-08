@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './styles.css';
 
 export function ReactUseRef() {
   const inputRef = useRef(null);
   const targetRef = useRef(null);
+
 
   const scrolltoTarget = () => {
     return targetRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -22,6 +23,7 @@ export function ReactUseRef() {
         <br />
         <label htmlFor="">Input with useref</label>
         <input ref={inputRef} type="text" />
+
 
         {/* ///////////////////scroll to specific element after render */}
         <div className="container--react-use-ref-scroll-to">
