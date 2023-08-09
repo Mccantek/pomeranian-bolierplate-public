@@ -12,6 +12,8 @@
   padding: 1em;
   z-index: 2;
   display: flex;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .cookies-agreement button.agree {
@@ -36,7 +38,6 @@
 
 .cookies-agreement .text-wrapper {
   margin: 2em;
-
 }
 
 .cookies-agreement .button-wrapper {
@@ -48,5 +49,10 @@
 .cookies-agreement .left {
   display: flex;
   flex: 1;
-  gap: 20px ;
+  gap: 20px;
+}
+
+.cookies-agreement.hidden {
+  opacity: 0;
+  pointer-events: none;
 }

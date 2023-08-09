@@ -6,6 +6,7 @@ import { Block09MetaData } from './Block09/router-data';
 import { SubRouteMetaData as mui_metadata } from './MaterialUIBasicElements/router-data';
 import { SubRouteExampleMetaData as Swagger } from './Swagger/router-data';
 import { ReactRouterEventsMetaData as useRef } from './ReactUseRef/router-data';
+import { ReactRouterEventsMetaData as Forms } from './Forms/router-data';
 
 export const blockRouterMetaData = [
   SubRouteExampleMetaData,
@@ -14,5 +15,6 @@ export const blockRouterMetaData = [
   mui_metadata,
   Swagger,
   useRef,
+  Forms,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
