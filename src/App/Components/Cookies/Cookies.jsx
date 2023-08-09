@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 import cookies from './cookie.svg';
 
 const Cookies = () => {
   const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    const hideCookies = document.cookie.includes('hideCookies=true');
+    setHidden(hideCookies);
+  }, []);
 
   const handleAgreement = () => {
     setHidden(true);
