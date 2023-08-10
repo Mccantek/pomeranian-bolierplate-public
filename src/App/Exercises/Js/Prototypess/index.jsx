@@ -5,11 +5,11 @@ function Car(make, model) {
   this.model = model;
 }
 
-Object.prototype.getmake = function () {
+Car.prototype.getmake = function () {
   return this.make;
 };
 
-Object.prototype.getmodel = function () {
+Car.prototype.getmodel = function () {
   return this.model;
 };
 function Bike(param) {

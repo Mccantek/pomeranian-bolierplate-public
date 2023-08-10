@@ -1,0 +1,27 @@
+function getRandom(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+const moleCount = 3;
+
+function getRandomIndexesByMoleCount() {
+  return Array(moleCount)
+    .fill(1)
+    .reduce((accumulator, currentValue, index) => {
+      let newNumber = getRandom(0, 9);
+
+      while (accumulator.includes(newNumber)) {
+        console.log('JUZ ISTNIEJE W AKUMULATORZE: ', newNumber);
+        newNumber = getRandom(0, 9);
+        console.log('WYLOSOWANE NA NOWO: ', newNumber);
+      }
+
+      console.log('NOWY NUMER: ', newNumber);
+
+      return [...accumulator, newNumber];
+    }, []);
+}
+
+console.log('RESULT', getRandomIndexesByMoleCount());

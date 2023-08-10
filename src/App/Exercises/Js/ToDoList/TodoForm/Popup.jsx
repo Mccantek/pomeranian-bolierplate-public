@@ -14,7 +14,7 @@ export function SuccessPopup({ title, onClose }) {
 
   return (
     <div className="success-popup">
-      <p>{title} dodano do listy zadań</p>
+      <p>{title} Dodano!</p>
     </div>
   );
 }
