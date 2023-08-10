@@ -6,16 +6,30 @@ import { RadioButtons } from './RadioButtons/RadioButtons';
 import { Checkboxes } from './Checkboxes/Checkboxes';
 import Select from 'react-select';
 
-const MyComponent = () => <Select options={options} />;
-Grouped;
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import { getFirestore } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
+const firebaseConfig = {
+  apiKey: 'AIzaSyBn3m6hOA61lIZM8htKwtpLX6gEgJp2ZU8',
+  authDomain: 'pomeranian-form-db.firebaseapp.com',
+  projectId: 'pomeranian-form-db',
+  storageBucket: 'pomeranian-form-db.appspot.com',
+  messagingSenderId: '907464398753',
+  appId: '1:907464398753:web:d5ff2dbed0c977d5ad1de0',
+  measurementId: 'G-8SQFFS4JNN',
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
 const validateEmail = (value) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   return emailPattern.test(value);
 };
-
-
 
 const productOptions = [
   { value: 'frontend', label: 'kurs front-end' },
@@ -89,10 +103,18 @@ export function Forms() {
     });
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const { nameAndSurname, email, product, paymentType, consents } = formData;
     if (nameAndSurname && email && product && paymentType && consents) {
       console.log('DANE WYSŁANE POPRAWNIE: ', formData);
+
+      try {
+        const docRef = await addDoc(collection(db, 'orders'), formData);
+
+        console.log('Document written with ID: ', docRef.id);
+      } catch (e) {
+        console.error('Error adding document: ', e);
+      }
     } else {
       setIsAllRequiredFieldsFilled(false);
     }
@@ -107,7 +129,7 @@ export function Forms() {
     >
       <MainSection title="ZAMÓWIENIE PRODUKTU">
         <FieldSection title="Wybierz produkt*">
-          <select
+          {/* <select
             name="product"
             value={formData.product}
             onChange={(event) => {
@@ -119,7 +141,20 @@ export function Forms() {
                 {option.label}
               </option>
             ))}
-          </select>
+          </select> */}
+
+          <Select
+            value={productOptions.find(
+              (item) => item.value === formData.product
+            )}
+            options={productOptions}
+            onChange={(selectedItem) => {
+              setFormData({
+                ...formData,
+                product: selectedItem.value,
+              });
+            }}
+          />
         </FieldSection>
         <FieldSection title="Wybierz formę płatności*">
           <RadioButtons
@@ -191,7 +226,7 @@ export function Forms() {
             list={[
               {
                 fieldName: 'consents',
-                label: 'apceptuję regulamin*',
+                label: 'akceptuję regulamin*',
                 isChecked: formData.consents,
               },
             ]}
