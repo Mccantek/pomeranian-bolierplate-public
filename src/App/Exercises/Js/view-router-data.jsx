@@ -10,6 +10,7 @@ import { blockRouterMetaData as emptyValuesandComments } from './EmptyValuesAndC
 import { blockRouterMetaData as JSArraysBasics } from './JSArrayBasics/router-data';
 import { blockRouterMetaData as Time } from './Time/router-data';
 import { blockRouterMetaData as Time2 } from './Time2/router-data';
+import {SubRouteExampleMetaData as HitTheMole} from './HitTheMoleGame/router-data'
 import { blockRouterMetaData as ExerciseStorage } from './Exercise-js-local-storage/router-data';
 import { blockRouterMetaData as SavedInput } from './Exercise-js-saved-input/router-data';
 import { blockRouterMetaData as TryAndCatch } from './TryCatchAndFinally/router-data';
@@ -29,6 +30,7 @@ export const blockRouterMetaData = [
   JSArraysBasics,
   Time,
   Time2,
+  HitTheMole,
   ExerciseStorage,
   SavedInput,
   TryAndCatch,

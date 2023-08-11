@@ -2,16 +2,35 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import './style.css';
-import { formatDate } from '../../../../helpers/formatDate';
-const BASE_API_URL = 'http://localhost:3333/api';
+import { TodoItem } from './TodoItem/TodoItem';
+import { TodoForm } from './TodoForm/TodoForm';
+import RefreshButton from '../../../Components/RefreshButton/RefreshButton';
+
+export const BASE_API_URL = 'http://localhost:3333/api';
+const timoutDuration = 5000; // 5 sekund oczekiwania na odpowiedz serwera
 export function ToDoList() {
-  const [getToDoList, setToDoList] = useState([]);
-  const [getError, setError] = useState(null);
-  const [getCounter, setCounter] = useState(0);
-  const handleFetchTodoData = async () => {
-    const timoutDuration = 5000; // 5 sekund oczekiwania na odpowiedz serwera
+  const [todoList, setToDoList] = useState([]);
+  const [error, setError] = useState([]);
+  const [isFormVisible, setFormVisible] = useState(false);
+  const [idForEdit, setIdForEdit] = useState(null);
+
+  function updatedTodoList(response) {
+    setToDoList(
+      todoList.map((todo) => {
+        if (todo.id === response.data.id) {
+          return response.data;
+        }
+        return todo;
+      })
+    );
+  }
+
+  const handleFetchTodoData = async (givenId) => {
+    const isGetSpecificTodoMode = Boolean(givenId);
+
+    const urlSuffix = isGetSpecificTodoMode ? `/${givenId}` : '';
     try {
-      const fetchDataPromise = axios.get(`${BASE_API_URL}/todo`);
+      const fetchDataPromise = axios.get(`${BASE_API_URL}/todo${urlSuffix}`);
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => reject(new Error('Response Timeout')), timoutDuration);
       });
@@ -23,12 +42,19 @@ export function ToDoList() {
       if (response) {
         setToDoList(response.data);
         setError('');
+
+        if (isGetSpecificTodoMode) {
+        updatedTodoList(response.data)
+        } else {
+          setToDoList(response.data);
+        }
       }
     } catch (error) {
       setToDoList([]);
       setError('Wystąpił błąd podczas komunikacji z serwerem' + error?.message);
     }
   };
+
   useEffect(() => {
     handleFetchTodoData();
   }, []);
@@ -36,44 +62,50 @@ export function ToDoList() {
   return (
     <div className="todo-container">
       <h2 className="todo-container__title">ToDo List</h2>
-      {getError && <p>{getError}</p>}
-      <div className="todo-container__list">
-        {getToDoList.length > 0 &&
-          getToDoList.map((todo) => {
-            const itemClasses = `todo-container-list__item ${
-              todo.isDone ? 'todo-container-list__item--darker' : ''
-            }`;
+      {error && (
+        <>
+          <p>
+            {error} <br />{' '}
+          </p>{' '}
+          <RefreshButton />
+        </>
+      )}
 
-            return (
-              <div className={itemClasses} key={todo.id}>
-                <div className="todo-container-list__item__wrapper">
-                  <h3 className="todo-container-list__item__wrapper__title">
-                    {todo.title}
-                  </h3>
-                  <div className="todo-container-list__item__wrapper__text--smaller todo-container-list__item__wrapper__text">
-                    {todo.author}
-                  </div>
-                  <div className="todo-container-list__item__wrapper__text--smaller todo-container-list__item__wrapper__text">
-                    {formatDate(todo.createdAt)}
-                  </div>
-                  <p className="todo-container-list__item__wrapper__text">
-                    {todo.note}
-                  </p>
-                </div>
-                <div className="todo-container-list__item__side">
-                  {todo.isDone && (
-                    <>
-                      <div className="todo-container-list__item__side__checkmark">
-                        &#10003;
-                      </div>
-                      <div>{formatDate(todo.doneDate)}</div>
-                    </>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-      </div>
+      {isFormVisible && (
+        <TodoForm
+          setFormVisible={setFormVisible}
+          handleFetchTodoData={handleFetchTodoData}
+          setIdForEdit={setIdForEdit}
+          data={todoList.find((todo) => todo.id === idForEdit)}
+        />
+      )}
+      {!isFormVisible && (
+        <>
+          <div className="todo-container__list">
+            {todoList.length > 0 &&
+              todoList.map((todo) => {
+                return (
+                  <TodoItem
+                    todo={todo}
+                    key={todo.id}
+                    getTodoList={handleFetchTodoData}
+                    setIdForEdit={setIdForEdit}
+                    setFormVisible={setFormVisible}
+                    updatedTodoList={updatedTodoList}
+                  />
+                );
+              })}
+          </div>
+          <button
+            className="big-button"
+            onClick={() => {
+              setFormVisible(true);
+            }}
+          >
+            DODAJ
+          </button>
+        </>
+      )}
     </div>
   );
 }
