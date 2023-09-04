@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Vector from '../Images/Vector.svg';
 import test from '../Images/test.svg';
 import cogwheel from '../Images/setting.svg';
+import photo from '../Images/MC50.jpg';
 
 export function AppHeader() {
   return (
@@ -27,7 +28,7 @@ export function AppHeader() {
           <img src={cogwheel} alt="" className="cogwheel" />{' '}
         </button>
         <div className="profile-picture">
-          <div className="placeholder"></div>
+          <div className="placeholder" style={{ backgroundImage: `url(${photo})` }}></div>
         </div>
         <div className="user-details">
           <p>Michał</p>
